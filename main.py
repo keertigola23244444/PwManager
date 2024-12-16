@@ -1,6 +1,12 @@
 from manager import PasswordManager
 
 
+def validate_key_loaded(pm : PasswordManager):
+    if not pm.keyloaded:
+        print("Key not loaded. Please load a key first.")
+        return False
+    return True
+
 def main():
     password = {
         "gmail": "password1",
@@ -29,17 +35,17 @@ def main():
         elif choice == '2':
             path = input("Enter key file path: ").strip()
             pm.load_key(path)
-        elif choice == '3':
+        elif choice == '3' and validate_key_loaded(pm):
             path = input("Enter password file path: ").strip()
             pm.create_password_file(path, password)
-        elif choice == '4':
+        elif choice == '4' and validate_key_loaded(pm):
             path = input("Enter password file path: ").strip()
             pm.load_password_file(path)
-        elif choice == '5':
+        elif choice == '5' and validate_key_loaded(pm):
             site = input("Enter site: ").strip()
             password = input("Enter password: ").strip()
             pm.add_password(site, password)
-        elif choice == '6':
+        elif choice == '6' and validate_key_loaded(pm):
             site = input("Enter site: ").strip()
             print(f"Password for {site}: {pm.get_password(site)}")
         elif choice == 'q':
