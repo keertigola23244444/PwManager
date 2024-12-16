@@ -38,7 +38,12 @@ def main():
         elif choice == '5':
             site = input("Enter site: ").strip()
             password = input("Enter password: ").strip()
+            if pm.validate_strength(password):
+                print("added successfully")
+            else:
+                print("WARNING: This password is weak, It is recommended to set a stronger password")
             pm.add_password(site, password)
+                
         elif choice == '6':
             site = input("Enter site: ").strip()
             print(f"Password for {site}: {pm.get_password(site)}")

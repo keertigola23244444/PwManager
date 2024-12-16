@@ -39,3 +39,27 @@ class PasswordManager:
 
     def get_password(self, site):
         return self.password_dict.get(site, "Password not found.")
+    def validate_strength(self, password):
+        # a password is strong if it has length greater than 8
+        # it has special characters such as !@#$%^&*
+        # it is a mix of letters, numbers
+        SpecialChar = '!@#$%^&*'
+        has_good_length = False
+        has_special_char = False
+        has_numeric_characters = False
+        has_capital_letters = False
+        has_small_letters = False
+        if len(password) > 8: 
+            has_good_length = True
+        for chr in password:
+            if chr in SpecialChar:
+                has_special_char = True
+            if chr.isupper():
+                has_capital_letters = True
+            if chr.islower():
+                has_small_letters = True
+            if chr.isdigit():
+                has_numeric_characters = True
+        return has_numeric_characters and has_good_length and\
+              has_capital_letters and has_special_char and has_small_letters
+
