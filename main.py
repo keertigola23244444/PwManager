@@ -42,6 +42,8 @@ def main():
                 print("added successfully")
             else:
                 print("WARNING: This password is weak, It is recommended to set a stronger password")
+                print("- Password should be more than 8 characters long")
+                print("- Password should have alphanumeric characters, capital letters and special characters")
             pm.add_password(site, password)
                 
         elif choice == '6':
