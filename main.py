@@ -1,4 +1,11 @@
 from manager import PasswordManager
+import pyperclip
+
+def validate_if_key_loaded(pm):
+    if not pm.keyloaded:
+        print("Key not loaded. Please load key first.")
+        return False
+    return True
 
 
 def main():
@@ -17,6 +24,7 @@ def main():
           4. Load an existing password file
           5. Add a password
           6. Get a password
+          7. List all sites
           q. Quit
           """)
     
@@ -29,19 +37,28 @@ def main():
         elif choice == '2':
             path = input("Enter key file path: ").strip()
             pm.load_key(path)
-        elif choice == '3':
+        elif choice == '3' and validate_if_key_loaded(pm):
             path = input("Enter password file path: ").strip()
             pm.create_password_file(path, password)
-        elif choice == '4':
+        elif choice == '4' and validate_if_key_loaded(pm):
             path = input("Enter password file path: ").strip()
             pm.load_password_file(path)
-        elif choice == '5':
+        elif choice == '5' and validate_if_key_loaded(pm):
             site = input("Enter site: ").strip()
             password = input("Enter password: ").strip()
             pm.add_password(site, password)
-        elif choice == '6':
+        elif choice == '6' and validate_if_key_loaded(pm):
             site = input("Enter site: ").strip()
-            print(f"Password for {site}: {pm.get_password(site)}")
+            res = pm.get_password(site)
+            print(f"Password for {site}: {res}")
+            if(res != "Password not found."):
+                pyperclip.copy(pm.get_password(site))
+                print("Password copied to clipboard.")
+
+        elif choice == '7' and validate_if_key_loaded(pm):
+            print("Saved Sites:")
+            for site in pm.password_dict:
+                print(site)
         elif choice == 'q':
             done = True
             print("Goodbye!")

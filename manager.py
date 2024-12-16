@@ -7,21 +7,26 @@ class PasswordManager:
         self.key = None
         self.password_file = None
         self.password_dict = {}
+        self.keyloaded = False
 
     def create_key(self, path):
         self.key = Fernet.generate_key()
         with open(path, 'wb') as f:
             f.write(self.key)
+        self.keyloaded = True
 
     def load_key(self, path):
         with open(path, 'rb') as f:
             self.key = f.read()
+        self.keyloaded = True
+
 
     def create_password_file(self, path, initial_values=None):
         self.password_file = path
         if initial_values is not None:
-            for site, password in initial_values.items():
-                self.add_password(site, password)
+            for site in initial_values:
+                print(initial_values[site])
+                self.add_password(site, initial_values[site])
 
     def load_password_file(self, path):
         self.password_file = path
