@@ -1,11 +1,7 @@
 from manager import PasswordManager
 import pyperclip
 
-def validate_if_key_loaded(pm):
-    if not pm.keyloaded:
-        print("Key not loaded. Please load key first.")
-        return False
-    return True
+
 
 
 def main():
@@ -37,17 +33,17 @@ def main():
         elif choice == '2':
             path = input("Enter key file path: ").strip()
             pm.load_key(path)
-        elif choice == '3' and validate_if_key_loaded(pm):
+        elif choice == '3':
             path = input("Enter password file path: ").strip()
             pm.create_password_file(path, password)
-        elif choice == '4' and validate_if_key_loaded(pm):
+        elif choice == '4':
             path = input("Enter password file path: ").strip()
             pm.load_password_file(path)
-        elif choice == '5' and validate_if_key_loaded(pm):
+        elif choice == '5':
             site = input("Enter site: ").strip()
             password = input("Enter password: ").strip()
             pm.add_password(site, password)
-        elif choice == '6' and validate_if_key_loaded(pm):
+        elif choice == '6':
             site = input("Enter site: ").strip()
             res = pm.get_password(site)
             print(f"Password for {site}: {res}")
@@ -55,7 +51,7 @@ def main():
                 pyperclip.copy(pm.get_password(site))
                 print("Password copied to clipboard.")
 
-        elif choice == '7' and validate_if_key_loaded(pm):
+        elif choice == '7':
             print("Saved Sites:")
             for site in pm.password_dict:
                 print(site)
