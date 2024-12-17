@@ -17,11 +17,13 @@ class PasswordManager:
         with open(path, 'rb') as f:
             self.key = f.read()
 
+
     def create_password_file(self, path, initial_values=None):
         self.password_file = path
         if initial_values is not None:
-            for site, password in initial_values.items():
-                self.add_password(site, password)
+            for site in initial_values:
+                print(initial_values[site])
+                self.add_password(site, initial_values[site])
 
     def load_password_file(self, path):
         self.password_file = path

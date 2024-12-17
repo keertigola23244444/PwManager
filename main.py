@@ -1,4 +1,7 @@
 from manager import PasswordManager
+import pyperclip
+
+
 
 
 def main():
@@ -17,6 +20,7 @@ def main():
           4. Load an existing password file
           5. Add a password
           6. Get a password
+          7. List all sites
           q. Quit
           """)
     
@@ -48,7 +52,16 @@ def main():
                 
         elif choice == '6':
             site = input("Enter site: ").strip()
-            print(f"Password for {site}: {pm.get_password(site)}")
+            res = pm.get_password(site)
+            print(f"Password for {site}: {res}")
+            if(res != "Password not found."):
+                pyperclip.copy(pm.get_password(site))
+                print("Password copied to clipboard.")
+
+        elif choice == '7':
+            print("Saved Sites:")
+            for site in pm.password_dict:
+                print(site)
         elif choice == 'q':
             done = True
             print("Goodbye!")
