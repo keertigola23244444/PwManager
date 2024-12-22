@@ -11,8 +11,6 @@ A **CLI-based password manager** built in Python for secure password storage and
 ├── main.py      # Entry point for executing the program
 ├── manager.py   # Core logic and functionality
 ```
-### Install required dependencies:
-`pip install -r requirements.txt`
 
 ---
 
